@@ -1,20 +1,18 @@
 require 'gilded_rose'
 
 describe 'gilded_rose' do
-  let(:items) { [
-    Item.new(name = "+5 Dexterity Vest", sell_in = 10, quality = 20),
-    Item.new(name = "+5 Dexterity Vest", sell_in = 0, quality = 20),
-    Item.new(name = "Aged Brie", sell_in = 2, quality = 0),
-    Item.new(name = "Sulfuras, Hand of Ragnaros", sell_in = 0, quality = 80),
-    Item.new(name = "Sulfuras, Hand of Ragnaros", sell_in = -1, quality = 80),
-    Item.new(name = "Backstage passes to a TAFKAL80ETC concert", sell_in = 15, quality = 20),
-    Item.new(name = "Backstage passes to a TAFKAL80ETC concert", sell_in = 10, quality = 20),
-    Item.new(name = "Backstage passes to a TAFKAL80ETC concert", sell_in = 5, quality = 20),
-    Item.new(name = "Backstage passes to a TAFKAL80ETC concert", sell_in = 0, quality = 20),
-    # # This Conjured item does not work properly yet
-    # Item.new(name = "Conjured Mana Cake", sell_in = 3, quality = 6), # <-- :O
-    ]
-  }
+  let(:item_0) { Item.new("+5 Dexterity Vest", 10, 20) }
+  let(:item_1) { Item.new("+5 Dexterity Vest", 0, 20) }
+  let(:item_2) { Item.new("Aged Brie", 2, 0) }
+  let(:item_3) { Item.new("Sulfuras, Hand of Ragnaros", 0, 80) }
+  let(:item_4) { Item.new("Sulfuras, Hand of Ragnaros", -1, 80) }
+  let(:item_5) { Item.new("Backstage passes to a TAFKAL80ETC concert", 15, 20) }
+  let(:item_6) { Item.new("Backstage passes to a TAFKAL80ETC concert", 10, 20) }
+  let(:item_7) { Item.new("Backstage passes to a TAFKAL80ETC concert", 5, 20) }
+  let(:item_8) { Item.new("Backstage passes to a TAFKAL80ETC concert", 0, 20) }
+  let(:item_9) { Item.new("Conjured Mana Cake", 3, 6) }
+  
+  let(:items) { [item_0, item_1, item_2, item_3, item_4, item_5, item_6, item_7, item_8, item_9] }
 
   let(:gilded_rose) { GildedRose.new(items) }
   
