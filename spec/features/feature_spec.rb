@@ -4,7 +4,7 @@ describe 'gilded_rose' do
   let(:items) { [
     Item.new(name = "+5 Dexterity Vest", sell_in = 10, quality = 20),
     Item.new(name = "+5 Dexterity Vest", sell_in = 0, quality = 20),
-    # Item.new(name = "Aged Brie", sell_in = 2, quality = 0),
+    Item.new(name = "Aged Brie", sell_in = 2, quality = 0),
     # Item.new(name = "Elixir of the Mongoose", sell_in = 5, quality = 7),
     # Item.new(name = "Sulfuras, Hand of Ragnaros", sell_in = 0, quality = 80),
     # Item.new(name = "Sulfuras, Hand of Ragnaros", sell_in = -1, quality = 80),
@@ -38,6 +38,10 @@ describe 'gilded_rose' do
   it "the Quality of an item can never be negative" do
     11.times { gilded_rose.update_quality() }
     expect(items[1].quality).to eq 0
+  end
+
+  it "Aged Brie actually increases in Quality the older it gets" do
+    expect { gilded_rose.update_quality() }.to change { items[2].quality }.by(1)
   end
 
 end
