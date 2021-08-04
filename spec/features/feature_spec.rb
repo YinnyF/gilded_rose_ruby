@@ -1,6 +1,7 @@
 require 'gilded_rose'
 
 describe 'gilded_rose' do
+  # arguments:   Item.new(name, sell_in, quality)
   let(:item_0) { Item.new("+5 Dexterity Vest", 10, 20) }
   let(:item_1) { Item.new("+5 Dexterity Vest", 0, 20) }
   let(:item_2) { Item.new("Aged Brie", 2, 0) }
@@ -71,5 +72,9 @@ describe 'gilded_rose' do
 
   it "Backstage passes has 0 Quality when sell_in date is < 0" do
     expect { gilded_rose.update_quality() }.to change { items[8].quality }.by(-20)
-  end 
+  end
+
+  xit "Conjured items degrade in Quality twice as fast as normal items" do
+    expect { gilded_rose.update_quality() }.to change { items[9].quality }.by(-2)
+  end
 end
