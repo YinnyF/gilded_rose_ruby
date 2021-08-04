@@ -26,3 +26,17 @@ Feel free to make any changes to the `UpdateQuality` method and add any new code
 Choose [legacy code](https://github.com/emilybache/GildedRose-Refactoring-Kata) (translated by Emily Bache) in the language of your choice. The aim is to practice good design in the language of your choice. Refactor the code in such a way that adding the new "conjured" functionality is easy.
 
 HINT: Test first FTW!
+
+# Approach
+
+* I copied the legacy code (Ruby) into this directory.
+
+* I rearranged the file structure for accessibility. 
+
+* I set up a spec helper for rspec, a Gemfile to keep track of gems, simplecov to monitor test coverage, rubocop for linting.
+
+* I separated out the Item class into its own file, and then wrote a few doubles for the items using the `let` method in the Spec file. 
+
+* Next, I observed the current class structure and created a Class Diagram:
+
+<img src="images/classdiagram.png" alt="class diagram version old" width="600"/>

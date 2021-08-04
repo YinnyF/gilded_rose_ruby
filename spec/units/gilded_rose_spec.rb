@@ -18,6 +18,8 @@ describe GildedRose do
       GildedRose.new(items).update_quality()
       expect(items[0].name).to eq "foo"
     end
+
+    
   end
 
 end
