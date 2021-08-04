@@ -44,4 +44,8 @@ describe 'gilded_rose' do
     expect { gilded_rose.update_quality() }.to change { items[2].quality }.by(1)
   end
 
+  it "the Quality of an item is never more than 50" do
+    51.times { gilded_rose.update_quality() }
+    expect(items[2].quality).to eq 50
+  end
 end
