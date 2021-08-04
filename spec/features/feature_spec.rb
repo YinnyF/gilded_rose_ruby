@@ -5,9 +5,8 @@ describe 'gilded_rose' do
     Item.new(name = "+5 Dexterity Vest", sell_in = 10, quality = 20),
     Item.new(name = "+5 Dexterity Vest", sell_in = 0, quality = 20),
     Item.new(name = "Aged Brie", sell_in = 2, quality = 0),
-    # Item.new(name = "Elixir of the Mongoose", sell_in = 5, quality = 7),
-    # Item.new(name = "Sulfuras, Hand of Ragnaros", sell_in = 0, quality = 80),
-    # Item.new(name = "Sulfuras, Hand of Ragnaros", sell_in = -1, quality = 80),
+    Item.new(name = "Sulfuras, Hand of Ragnaros", sell_in = 0, quality = 80),
+    Item.new(name = "Sulfuras, Hand of Ragnaros", sell_in = -1, quality = 80),
     # Item.new(name = "Backstage passes to a TAFKAL80ETC concert", sell_in = 15, quality = 20),
     # Item.new(name = "Backstage passes to a TAFKAL80ETC concert", sell_in = 10, quality = 49),
     # Item.new(name = "Backstage passes to a TAFKAL80ETC concert", sell_in = 5, quality = 49),
@@ -47,5 +46,15 @@ describe 'gilded_rose' do
   it "the Quality of an item is never more than 50" do
     51.times { gilded_rose.update_quality() }
     expect(items[2].quality).to eq 50
+  end
+
+  it "Sulfuras never has to be sold" do
+    expect { gilded_rose.update_quality() }.to change { items[3].sell_in }.by(0)
+    expect { gilded_rose.update_quality() }.to change { items[4].sell_in }.by(0)
+  end
+
+  it "Sulfuras never decreases in Quality" do
+    expect { gilded_rose.update_quality() }.to change { items[3].quality }.by(0)
+    expect { gilded_rose.update_quality() }.to change { items[4].quality }.by(0)
   end
 end
