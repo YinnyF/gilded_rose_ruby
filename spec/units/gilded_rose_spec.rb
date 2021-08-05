@@ -85,7 +85,7 @@ describe GildedRose do
     end
 
     context "special item - Backstage passes" do
-      it "amends the quality of an item by +1 when the sell_in date is greater than 10" do
+      it "amends the quality of an item by +1 when the sell_in is greater than 10" do
         backstage_pass = double(Item, name: "Backstage passes to a TAFKAL80ETC concert", sell_in: 15, quality: 20, 'sell_in=': 'sell in changed', 'quality=': 'quality changed')
         items = [backstage_pass]
         subject = described_class.new(items)
@@ -94,7 +94,7 @@ describe GildedRose do
         subject.update_quality()
       end
 
-      it "amends the quality of an item by +2 when the sell_in date is 10" do
+      it "amends the quality of an item by +2 when the sell_in is 10" do
         backstage_pass = double(Item, name: "Backstage passes to a TAFKAL80ETC concert", sell_in: 10, 'sell_in=': 'sell in changed', 'quality=': 'quality changed')
         allow(backstage_pass).to receive(:quality).and_return(20, 21)
         items = [backstage_pass]
@@ -104,13 +104,23 @@ describe GildedRose do
         subject.update_quality()
       end
 
-      it "amends the quality of an item by +3 when the sell_in date is 5" do
+      it "amends the quality of an item by +3 when the sell_in is 5" do
         backstage_pass = double(Item, name: "Backstage passes to a TAFKAL80ETC concert", sell_in: 5, 'sell_in=': 'sell in changed', 'quality=': 'quality changed')
         allow(backstage_pass).to receive(:quality).and_return(20, 21, 22)
         items = [backstage_pass]
         subject = described_class.new(items)
         
         expect(backstage_pass).to receive(:quality=).with(23)
+        subject.update_quality()
+      end
+
+      it "amends the quality to 0 when the sell_in is 0" do
+        backstage_pass = double(Item, name: "Backstage passes to a TAFKAL80ETC concert", quality: 50, 'sell_in=': 'sell in changed', 'quality=': 'quality changed')
+        allow(backstage_pass).to receive(:sell_in).and_return(0, -1)
+        items = [backstage_pass]
+        subject = described_class.new(items)
+        
+        expect(backstage_pass).to receive(:quality=).with(0)
         subject.update_quality()
       end
     end
