@@ -37,6 +37,15 @@ describe GildedRose do
         expect(regular_item_2).to receive(:quality=).with(18)
         gilded_rose.update_quality() 
       end
+
+      it "the quality of an item is not reduced beyond 0" do
+        regular_item_3 = double(Item, name: "+5 Dexterity Vest", sell_in: 30, quality: 0, 'sell_in=': 'sell in changed', 'quality=': 'quality changed')
+        items_3 = [regular_item_3]
+        gilded_rose = GildedRose.new(items_3)
+
+        expect(regular_item_3).not_to receive(:quality=)
+        gilded_rose.update_quality() 
+      end
     end
 
   end
