@@ -58,7 +58,7 @@ describe GildedRose do
         subject.update_quality()
       end
 
-      it "the quality of an item is not increased beyond 50" do
+      it "does not change the quality of an item beyond 50" do
         aged_brie = double(Item, name: "Aged Brie", sell_in: 2, quality: 50, 'sell_in=': 'sell in changed', 'quality=': 'quality changed')
         items = [aged_brie]
         subject = described_class.new(items)
@@ -68,5 +68,15 @@ describe GildedRose do
       end
     end
 
+    context "special item - Sulfuras, Hand of Ragnaros" do
+      it "does not change the sell_in date" do
+        sulfuras = double(Item, name: "Sulfuras, Hand of Ragnaros", sell_in: 0, quality: 80, 'sell_in=': 'sell in changed', 'quality=': 'quality changed')
+        items = [sulfuras]
+        subject = described_class.new(items)
+        
+        expect(sulfuras).not_to receive(:sell_in=)
+        subject.update_quality()
+      end
+    end
   end
 end
