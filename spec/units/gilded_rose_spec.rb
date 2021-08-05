@@ -69,20 +69,16 @@ describe GildedRose do
     end
 
     context "special item - Sulfuras, Hand of Ragnaros" do
+      let(:sulfuras) { double(Item, name: "Sulfuras, Hand of Ragnaros", sell_in: 0, quality: 80, 'sell_in=': 'sell in changed', 'quality=': 'quality changed') }
+      let(:items) { [sulfuras] }
+      subject { described_class.new(items) }
+
       it "does not change the sell_in days" do
-        sulfuras = double(Item, name: "Sulfuras, Hand of Ragnaros", sell_in: 0, quality: 80, 'sell_in=': 'sell in changed', 'quality=': 'quality changed')
-        items = [sulfuras]
-        subject = described_class.new(items)
-        
         expect(sulfuras).not_to receive(:sell_in=)
         subject.update_quality()
       end
 
       it "does not change the quality" do
-        sulfuras = double(Item, name: "Sulfuras, Hand of Ragnaros", sell_in: 0, quality: 80, 'sell_in=': 'sell in changed', 'quality=': 'quality changed')
-        items = [sulfuras]
-        subject = described_class.new(items)
-        
         expect(sulfuras).not_to receive(:quality=)
         subject.update_quality()
       end
