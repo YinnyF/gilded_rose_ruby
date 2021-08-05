@@ -10,7 +10,7 @@ class GildedRose
   def update_quality
     @items.each do |item|
       if !brie?(item) and !backstage_pass?(item)
-        if get_quality(item) > 0
+        if has_quality?(item)
           if !sulfuras?(item)
             decrease_quality(item)
           end
@@ -38,7 +38,7 @@ class GildedRose
       if passed_sell_by_date?(item)
         if !brie?(item)
           if !backstage_pass?(item)
-            if get_quality(item) > 0
+            if has_quality?(item)
               if !sulfuras?(item)
                 decrease_quality(item)
               end
@@ -67,6 +67,10 @@ class GildedRose
 
   def decrease_quality(item)
     item.quality -= 1
+  end
+
+  def has_quality?(item)
+    get_quality(item) > 0
   end
 
   def get_sell_in(item)
