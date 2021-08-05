@@ -16,16 +16,16 @@ class GildedRose
           end
         end
       else
-        if get_quality(item) < MAX_QUALITY
+        if less_than_max_quality(item)
           increase_quality(item)
           if item.name == "Backstage passes to a TAFKAL80ETC concert"
             if item.sell_in < 11
-              if get_quality(item) < MAX_QUALITY
+              if less_than_max_quality(item)
                 increase_quality(item)
               end
             end
             if item.sell_in < 6
-              if get_quality(item) < MAX_QUALITY
+              if less_than_max_quality(item)
                 increase_quality(item)
               end
             end
@@ -47,29 +47,34 @@ class GildedRose
             item.quality = get_quality(item) - get_quality(item)
           end
         else
-          if item.quality < MAX_QUALITY
+          if less_than_max_quality(item)
             increase_quality(item)
           end
         end
       end
     end
   end
-end
 
-private
+  private
 
-def get_quality(item)
-  item.quality
-end
+  def get_quality(item)
+    item.quality
+  end
 
-def increase_quality(item)
-  item.quality += 1
-end
+  def increase_quality(item)
+    item.quality += 1
+  end
 
-def decrease_quality(item)
-  item.quality -= 1
-end
+  def decrease_quality(item)
+    item.quality -= 1
+  end
 
-def decrease_sell_in(item)
-  item.sell_in = item.sell_in - 1
+  def decrease_sell_in(item)
+    item.sell_in = item.sell_in - 1
+  end
+
+  def less_than_max_quality(item)
+    get_quality(item) < MAX_QUALITY
+  end
+
 end
