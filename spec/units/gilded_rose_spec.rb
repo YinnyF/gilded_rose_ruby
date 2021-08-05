@@ -48,5 +48,16 @@ describe GildedRose do
       end
     end
 
+    context "special item - Aged Brie" do
+      let(:aged_brie) { double(Item, name: "Aged Brie", sell_in: 2, quality: 0, 'sell_in=': 'sell in changed', 'quality=': 'quality changed') }
+      let(:items) { [aged_brie] }
+      subject { described_class.new(items) }
+
+      it "amends the quality by +1" do
+        expect(aged_brie).to receive(:quality=).with(aged_brie.quality + 1)
+        subject.update_quality()
+      end
+    end
+
   end
 end
