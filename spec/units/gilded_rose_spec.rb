@@ -27,6 +27,16 @@ describe GildedRose do
         expect(regular_item).to receive(:quality=).with(regular_item.quality - 1)
         subject.update_quality()
       end
+
+      it "amends the quality of an item by -2 once the sell by date has passed" do
+        regular_item_2 = double(Item, name: "+5 Dexterity Vest", sell_in: 0, 'sell_in=': 'sell in changed', 'quality=': 'quality changed')
+        allow(regular_item_2).to receive(:quality).and_return(20, 19)
+        items_2 = [regular_item_2]
+        gilded_rose = GildedRose.new(items_2)
+
+        expect(regular_item_2).to receive(:quality=).with(18)
+        gilded_rose.update_quality() 
+      end
     end
 
   end
