@@ -83,5 +83,16 @@ describe GildedRose do
         subject.update_quality()
       end
     end
+
+    context "special item - Backstage passes" do
+      it "amends the quality of an item by +1 when the sell_in date is greater than 10" do
+        backstage_pass = double(Item, name: "Backstage passes to a TAFKAL80ETC concert", sell_in: 15, quality: 20, 'sell_in=': 'sell in changed', 'quality=': 'quality changed')
+        items = [backstage_pass]
+        subject = described_class.new(items)
+        
+        expect(backstage_pass).to receive(:quality=).with(backstage_pass.quality + 1)
+        subject.update_quality()
+      end
+    end
   end
 end
