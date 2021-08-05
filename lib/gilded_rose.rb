@@ -44,7 +44,7 @@ class GildedRose
               end
             end
           else
-            item.quality = 0
+            set_quality_to_0(item)
           end
         else
           if less_than_max_quality(item)
@@ -67,6 +67,10 @@ class GildedRose
 
   def decrease_quality(item)
     item.quality -= 1
+  end
+
+  def set_quality_to_0(item)
+    item.quality = 0
   end
 
   def has_quality?(item)
