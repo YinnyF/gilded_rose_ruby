@@ -74,7 +74,7 @@ class GildedRose
   end
 
   def decrease_sell_in(item)
-    item.sell_in = item.sell_in - 1
+    item.sell_in -= 1
   end
 
   def less_than_max_quality(item)
