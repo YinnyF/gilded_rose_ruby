@@ -1,6 +1,7 @@
 require_relative 'item'
 
 class GildedRose
+  MAX_QUALITY = 50
 
   def initialize(items)
     @items = items
@@ -15,16 +16,16 @@ class GildedRose
           end
         end
       else
-        if get_quality(item) < 50
+        if get_quality(item) < MAX_QUALITY
           increase_quality(item)
           if item.name == "Backstage passes to a TAFKAL80ETC concert"
             if item.sell_in < 11
-              if get_quality(item) < 50
+              if get_quality(item) < MAX_QUALITY
                 increase_quality(item)
               end
             end
             if item.sell_in < 6
-              if get_quality(item) < 50
+              if get_quality(item) < MAX_QUALITY
                 increase_quality(item)
               end
             end
@@ -46,7 +47,7 @@ class GildedRose
             item.quality = get_quality(item) - get_quality(item)
           end
         else
-          if item.quality < 50
+          if item.quality < MAX_QUALITY
             increase_quality(item)
           end
         end
@@ -66,7 +67,7 @@ def increase_quality(item)
 end
 
 def decrease_quality(item)
-  item.quality = get_quality(item) - 1
+  item.quality -= 1
 end
 
 def decrease_sell_in(item)
