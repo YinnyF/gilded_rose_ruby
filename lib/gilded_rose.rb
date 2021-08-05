@@ -19,12 +19,12 @@ class GildedRose
         if less_than_max_quality(item)
           increase_quality(item)
           if backstage_pass?(item)
-            if item.sell_in < 11
+            if get_sell_in(item) < 11
               if less_than_max_quality(item)
                 increase_quality(item)
               end
             end
-            if item.sell_in < 6
+            if get_sell_in(item) < 6
               if less_than_max_quality(item)
                 increase_quality(item)
               end
@@ -35,7 +35,7 @@ class GildedRose
       if !sulfuras?(item)
         decrease_sell_in(item)
       end
-      if item.sell_in < 0
+      if get_sell_in(item) < 0
         if !brie?(item)
           if !backstage_pass?(item)
             if get_quality(item) > 0
@@ -67,6 +67,10 @@ class GildedRose
 
   def decrease_quality(item)
     item.quality -= 1
+  end
+
+  def get_sell_in(item)
+    item.sell_in
   end
 
   def decrease_sell_in(item)
