@@ -35,7 +35,7 @@ class GildedRose
       if !sulfuras?(item)
         decrease_sell_in(item)
       end
-      if get_sell_in(item) < 0
+      if passed_sell_by_date?(item)
         if !brie?(item)
           if !backstage_pass?(item)
             if get_quality(item) > 0
@@ -79,6 +79,10 @@ class GildedRose
 
   def less_than_max_quality(item)
     get_quality(item) < MAX_QUALITY
+  end
+
+  def passed_sell_by_date?(item)
+    get_sell_in(item) < 0
   end
 
   def brie?(item)
