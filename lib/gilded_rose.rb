@@ -44,7 +44,7 @@ class GildedRose
               end
             end
           else
-            item.quality = get_quality(item) - get_quality(item)
+            item.quality = 0
           end
         else
           if less_than_max_quality(item)
