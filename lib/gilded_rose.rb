@@ -32,7 +32,7 @@ class GildedRose
         end
       end
       if item.name != "Sulfuras, Hand of Ragnaros"
-        item.sell_in = item.sell_in - 1
+        decrease_sell_in(item)
       end
       if item.sell_in < 0
         if item.name != "Aged Brie"
@@ -62,9 +62,13 @@ def get_quality(item)
 end
 
 def increase_quality(item)
-  item.quality = get_quality(item) + 1
+  item.quality += 1
 end
 
 def decrease_quality(item)
   item.quality = get_quality(item) - 1
+end
+
+def decrease_sell_in(item)
+  item.sell_in = item.sell_in - 1
 end
