@@ -2,6 +2,9 @@ require_relative 'item'
 
 class GildedRose
   MAX_QUALITY = 50
+  # Consider renaming 🤔
+  DAYS_TO_CONCERT_CLOSE = 10
+  DAYS_TO_CONCERT_CLOSER = 5
 
   def initialize(items)
     @items = items
@@ -19,12 +22,12 @@ class GildedRose
         if less_than_max_quality(item)
           increase_quality(item)
           if backstage_pass?(item)
-            if get_sell_in(item) < 11
+            if get_sell_in(item) <= DAYS_TO_CONCERT_CLOSE
               if less_than_max_quality(item)
                 increase_quality(item)
               end
             end
-            if get_sell_in(item) < 6
+            if get_sell_in(item) <= DAYS_TO_CONCERT_CLOSER
               if less_than_max_quality(item)
                 increase_quality(item)
               end
