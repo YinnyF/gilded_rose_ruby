@@ -19,21 +19,18 @@ class GildedRose
           decrease_quality(item)
         end
       else
-        if less_than_max_quality(item)
-          increase_quality(item)
-          if backstage_pass?(item)
-            if get_sell_in(item) <= DAYS_TO_CONCERT_CLOSE
-              if less_than_max_quality(item)
-                increase_quality(item)
-              end
-            end
-            if get_sell_in(item) <= DAYS_TO_CONCERT_CLOSER
-              if less_than_max_quality(item)
-                increase_quality(item)
-              end
-            end
+        
+        increase_quality(item)
+        
+        if backstage_pass?(item)
+          if get_sell_in(item) <= DAYS_TO_CONCERT_CLOSE
+            increase_quality(item)
+          end
+          if get_sell_in(item) <= DAYS_TO_CONCERT_CLOSER
+            increase_quality(item)
           end
         end
+
       end
 
       decrease_sell_in(item)
@@ -48,12 +45,10 @@ class GildedRose
             set_quality_to_0(item)
           end
         else
-          if less_than_max_quality(item)
-            increase_quality(item)
-          end
+          increase_quality(item)
         end
       end
-      
+
     end
   end
 
@@ -63,7 +58,13 @@ class GildedRose
     item.quality
   end
 
+  def less_than_max_quality(item)
+    get_quality(item) < MAX_QUALITY
+  end
+
   def increase_quality(item)
+    return unless less_than_max_quality(item)
+
     item.quality += 1
   end
 
@@ -85,10 +86,6 @@ class GildedRose
 
   def decrease_sell_in(item)
     item.sell_in -= 1
-  end
-
-  def less_than_max_quality(item)
-    get_quality(item) < MAX_QUALITY
   end
 
   def passed_sell_by_date?(item)
