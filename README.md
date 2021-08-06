@@ -29,6 +29,8 @@ HINT: Test first FTW!
 
 # Approach
 
+## Refactoring
+
 * I copied the legacy code (Ruby) into this directory.
 
 * I rearranged the file structure for accessibility. 
@@ -64,4 +66,12 @@ HINT: Test first FTW!
 
   <img src="images/pattern.png" alt="example code with pattern" width="300"/>
 
-*
+* I refactored each branch into their own private methods and further refactored using the Single Responsibility Principle (SRP).
+
+* I ran rubocop (linter) to identify other problem areas and corrected.
+
+## Implementing the new feature
+
+* I wrote a failing feature test (which was on pending mode previously): "Conjured items degrade in Quality twice as fast as normal items".
+
+* I wrote 2 unit tests to ensure the quality degrades by -2 when sell_in date is > 0, and then -4 once it has passed. I implemented the change to the code that is similar to the other methods to make the test pass green.
