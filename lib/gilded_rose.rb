@@ -15,9 +15,7 @@ class GildedRose
       next if sulfuras?(item)
 
       if !brie?(item) and !backstage_pass?(item)
-        if has_quality?(item)
-          decrease_quality(item)
-        end
+        decrease_quality(item)
       else
         
         increase_quality(item)
@@ -38,9 +36,7 @@ class GildedRose
       if passed_sell_by_date?(item)
         if !brie?(item)
           if !backstage_pass?(item)
-            if has_quality?(item)
-              decrease_quality(item)
-            end
+            decrease_quality(item)
           else
             set_quality_to_0(item)
           end
@@ -68,16 +64,18 @@ class GildedRose
     item.quality += 1
   end
 
+  def has_quality?(item)
+    get_quality(item) > 0
+  end
+
   def decrease_quality(item)
+    return unless has_quality?(item)
+
     item.quality -= 1
   end
 
   def set_quality_to_0(item)
     item.quality = 0
-  end
-
-  def has_quality?(item)
-    get_quality(item) > 0
   end
 
   def get_sell_in(item)
