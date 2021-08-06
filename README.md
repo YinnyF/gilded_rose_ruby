@@ -62,6 +62,6 @@ HINT: Test first FTW!
 
 * another pattern emerges (see below). I probably don't want the code to ask if the item is a `brie?` or `backstage_pass?` more than once: 
 
-<img src="images/pattern.png" alt="example code with pattern" width="600"/>
+  <img src="images/pattern.png" alt="example code with pattern" width="300"/>
 
 *
