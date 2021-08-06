@@ -12,17 +12,7 @@ class GildedRose
 
   def update_quality
     @items.each do |item|
-      next if sulfuras?(item)
-      decrease_sell_in(item)
-
-      if brie?(item)
-        change_quality_of_brie(item)
-      elsif backstage_pass?(item)
-        change_quality_of_backstage_pass(item)
-      else # regular item
-        change_quality_of_regular(item)
-      end
-
+      update_item_quality(item)
     end
   end
 
@@ -108,5 +98,19 @@ class GildedRose
   def change_quality_of_regular(item)
     decrease_quality(item) if passed_sell_by_date?(item)
     decrease_quality(item)
+  end
+
+  def update_item_quality(item)
+    return if sulfuras?(item)
+    
+    decrease_sell_in(item)
+
+    if brie?(item)
+      change_quality_of_brie(item)
+    elsif backstage_pass?(item)
+      change_quality_of_backstage_pass(item)
+    else # regular item
+      change_quality_of_regular(item)
+    end
   end
 end
