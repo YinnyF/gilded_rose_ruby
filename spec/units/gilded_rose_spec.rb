@@ -66,6 +66,16 @@ describe GildedRose do
         expect(aged_brie).not_to receive(:quality=)
         subject.update_quality()
       end
+
+      it "amends the quality by +2 once sell by date has passed" do
+        aged_brie = double(Item, name: "Aged Brie", sell_in: 0, 'sell_in=': 'sell in changed', 'quality=': 'quality changed')
+        allow(aged_brie).to receive(:quality).and_return(0, 1)
+        items = [aged_brie]
+        subject = described_class.new(items)
+        
+        expect(aged_brie).to receive(:quality=).with(2)
+        subject.update_quality()
+      end
     end
 
     context "special item - Sulfuras, Hand of Ragnaros" do

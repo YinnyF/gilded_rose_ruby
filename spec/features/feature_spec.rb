@@ -43,6 +43,11 @@ describe 'gilded_rose' do
     expect { gilded_rose.update_quality() }.to change { items[2].quality }.by(1)
   end
 
+  it "Aged Brie actually increases by 2 Quality once the sell by date has passed" do
+    2.times { gilded_rose.update_quality() }
+    expect { gilded_rose.update_quality() }.to change { items[2].quality }.by(2)
+  end
+
   it "the Quality of an item is never more than 50" do
     51.times { gilded_rose.update_quality() }
     expect(items[2].quality).to eq 50
