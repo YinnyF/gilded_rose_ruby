@@ -20,12 +20,9 @@ class GildedRose
         increase_quality(item)
       elsif backstage_pass?(item)
         if get_sell_in(item) <= DAYS_TO_CONCERT_CLOSER # days to concert <= 5
-          increase_quality(item)
-          increase_quality(item)
-          increase_quality(item)
+          3.times { increase_quality(item) }
         elsif get_sell_in(item) <= DAYS_TO_CONCERT_CLOSE # days to concert <= 10
-          increase_quality(item)
-          increase_quality(item)
+          2.times { increase_quality(item) }
         else # days to concert > 10
           increase_quality(item)
         end
