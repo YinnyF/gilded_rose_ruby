@@ -16,16 +16,16 @@ class GildedRose
 
       decrease_sell_in(item)
 
-      if brie?(item) || backstage_pass?(item) # regular item
+      if brie?(item)
+        increase_quality(item)
+      elsif backstage_pass?(item)
         increase_quality(item)
         
-        if backstage_pass?(item)
-          if get_sell_in(item) <= DAYS_TO_CONCERT_CLOSE
-            increase_quality(item)
-          end
-          if get_sell_in(item) <= DAYS_TO_CONCERT_CLOSER
-            increase_quality(item)
-          end
+        if get_sell_in(item) <= DAYS_TO_CONCERT_CLOSER
+          increase_quality(item)
+          increase_quality(item)
+        elsif get_sell_in(item) <= DAYS_TO_CONCERT_CLOSE
+          increase_quality(item)
         end
       else # regular item
         decrease_quality(item)
