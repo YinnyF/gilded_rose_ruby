@@ -38,7 +38,7 @@ class GildedRose
           if !backstage_pass?(item)
             decrease_quality(item)
           else
-            set_quality_to_0(item)
+            make_quality_0(item)
           end
         else
           increase_quality(item)
@@ -64,17 +64,17 @@ class GildedRose
     item.quality += 1
   end
 
-  def has_quality?(item)
+  def non_zero_quality?(item)
     get_quality(item) > 0
   end
 
   def decrease_quality(item)
-    return unless has_quality?(item)
+    return unless non_zero_quality?(item)
 
     item.quality -= 1
   end
 
-  def set_quality_to_0(item)
+  def make_quality_0(item)
     item.quality = 0
   end
 
