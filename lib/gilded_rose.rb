@@ -14,6 +14,8 @@ class GildedRose
     @items.each do |item|
       next if sulfuras?(item)
 
+      decrease_sell_in(item)
+
       if !brie?(item) and !backstage_pass?(item)
         decrease_quality(item)
       else
@@ -30,8 +32,6 @@ class GildedRose
         end
 
       end
-
-      decrease_sell_in(item)
 
       if passed_sell_by_date?(item)
         if !brie?(item)
