@@ -40,3 +40,28 @@ HINT: Test first FTW!
 * Next, I observed the current class structure and created a Class Diagram:
 
 <img src="images/classdiagram.png" alt="class diagram version old" width="600"/>
+ 
+
+* I wrote feature tests based off the description from team Gilded Rose. I ensured that these feature tests passed.
+
+* I wrote unit tests by thinking 'what do I need `#update_item` to do?'. The goal was to write unit tests for the method and ensure they passed before changing any of the legacy code. I used doubles to isolate from the item class and stubbed it's getter methods, then tested that the amounts passed to the setter method was correct. 
+
+* After all feature tests and unit tests were passing, I started by taking a single unit of responsibility and refactoring it into a private method (for example, getting the quality of an item, checking an item name, increasing quality by 1, etc). I repeated this task starting from the simplest cases. After each small change I made a commit to keep my commits "atomic", and also check that my tests still passed. (SRP, DRY)
+
+* I refactored out magic numbers.
+
+* Since I had used good naming conventions, the code was more readable, and so I able to notice patterns in the code (for example, item quality was only increased after checking that it is less than max quality. So I moved the check for max quality to be inside `#increase_quality`. There was a similar case for #decrease_quality).
+
+* There were essentially 4 categories of items the shop could sell. It was clear that the Sulfuras item needs to be refactored out and dealt with first since we do not actually want to update any attribute for it. Aside from that, each item's `sell_in` date is decreased each time `#update_item` is called, so I put that near the top of the method, easy to see. 
+
+* It was clear that such deeply nested `if` statements made the code confusing, so I decided to tackle that and try to refactor out the nesting with incremental changes. I tried to start with the inner-most-nested if statements. 
+
+* Since an if statement runs on the first 'branch' that a condition evaluates to true, I re-ordered some branches on the if statements to be clearer/DRY'er.
+
+* Looking at the code now, there is at max 1 `if` statement nested inside an `if` statement. Up until now, I had not really changed the way how the code does it's job (or changed much of the tests), only refactored as much as I could. I started thinking about how I want the code to work - perhaps more efficiently. 
+
+* another pattern emerges (see below). I probably don't want the code to ask if the item is a `brie?` or `backstage_pass?` more than once: 
+
+<img src="images/pattern.png" alt="example code with pattern" width="600"/>
+
+*
