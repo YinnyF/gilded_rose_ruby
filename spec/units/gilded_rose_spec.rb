@@ -145,6 +145,16 @@ describe GildedRose do
         expect(conjured).to receive(:quality=).with(18)
         gilded_rose.update_quality() 
       end 
+
+      it "amends the quality by -4 when sell_in passed" do
+        conjured = double(Item, name: "Conjured Mana Cake", sell_in: 0, 'sell_in=': 'sell in changed', 'quality=': 'quality changed')
+        allow(conjured).to receive(:quality).and_return(20, 19, 18, 17)
+        items = [conjured]
+        gilded_rose = GildedRose.new(items)
+
+        expect(conjured).to receive(:quality=).with(16)
+        gilded_rose.update_quality() 
+      end
     end
   end
 end
