@@ -18,8 +18,7 @@ class GildedRose
 
       if !brie?(item) and !backstage_pass?(item)
         decrease_quality(item)
-      else
-        
+      else        
         increase_quality(item)
         
         if backstage_pass?(item)
@@ -34,14 +33,14 @@ class GildedRose
       end
 
       if passed_sell_by_date?(item)
-        if !brie?(item)
+        if brie?(item)
+          increase_quality(item)
+        else
           if !backstage_pass?(item)
             decrease_quality(item)
           else
             make_quality_0(item)
           end
-        else
-          increase_quality(item)
         end
       end
 
