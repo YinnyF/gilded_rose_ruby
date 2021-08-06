@@ -27,6 +27,18 @@ Choose [legacy code](https://github.com/emilybache/GildedRose-Refactoring-Kata) 
 
 HINT: Test first FTW!
 
+# Usage
+
+Install gems:
+```
+bundle install
+```
+
+To run tests:
+```
+rspec
+```
+
 # Approach
 
 ## Refactoring
