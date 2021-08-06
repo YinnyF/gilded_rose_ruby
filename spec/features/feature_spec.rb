@@ -79,7 +79,7 @@ describe 'gilded_rose' do
     expect { gilded_rose.update_quality() }.to change { items[8].quality }.by(-20)
   end
 
-  xit "Conjured items degrade in Quality twice as fast as normal items" do
+  it "Conjured items degrade in Quality twice as fast as normal items" do
     expect { gilded_rose.update_quality() }.to change { items[9].quality }.by(-2)
   end
 end

@@ -134,5 +134,16 @@ describe GildedRose do
         subject.update_quality()
       end
     end
+
+    context "special item - Conjured Mana Cake" do
+      it "amends the quality by -2" do
+        conjured = double(Item, name: "Conjured Mana Cake", sell_in: 10, quality: 20, 'sell_in=': 'sell in changed', 'quality=': 'quality changed')
+        items = [conjured]
+        gilded_rose = GildedRose.new(items)
+
+        expect(conjured).to receive(:quality=).with(18)
+        gilded_rose.update_quality() 
+      end 
+    end
   end
 end
