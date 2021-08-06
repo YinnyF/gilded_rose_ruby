@@ -42,12 +42,12 @@ class GildedRose
     item.quality += 1
   end
 
-  def non_zero_quality?(item)
-    get_quality(item) > 0
+  def positive_quality?(item)
+    get_quality(item).positive?
   end
 
   def decrease_quality(item)
-    return unless non_zero_quality?(item)
+    return unless positive_quality?(item)
 
     item.quality -= 1
   end
@@ -65,7 +65,7 @@ class GildedRose
   end
 
   def passed_sell_by_date?(item)
-    get_sell_in(item) < 0
+    get_sell_in(item).negative?
   end
 
   def brie?(item)
