@@ -137,7 +137,8 @@ describe GildedRose do
 
     context "special item - Conjured Mana Cake" do
       it "amends the quality by -2" do
-        conjured = double(Item, name: "Conjured Mana Cake", sell_in: 10, quality: 20, 'sell_in=': 'sell in changed', 'quality=': 'quality changed')
+        conjured = double(Item, name: "Conjured Mana Cake", sell_in: 10, 'sell_in=': 'sell in changed', 'quality=': 'quality changed')
+        allow(conjured).to receive(:quality).and_return(20, 19)
         items = [conjured]
         gilded_rose = GildedRose.new(items)
 

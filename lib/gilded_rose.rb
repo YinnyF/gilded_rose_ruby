@@ -70,6 +70,10 @@ class GildedRose
     item.name == "Backstage passes to a TAFKAL80ETC concert"
   end
 
+  def conjured?(item)
+    item.name == "Conjured Mana Cake"
+  end
+
   def change_quality_of_brie(item)
     increase_quality(item)
     increase_quality(item) if passed_sell_by_date?(item)
@@ -95,6 +99,11 @@ class GildedRose
     end
   end
 
+  def change_quality_of_conjured(item)
+    2.times { decrease_quality(item) } if passed_sell_by_date?(item)
+    2.times { decrease_quality(item) }
+  end
+
   def change_quality_of_regular(item)
     decrease_quality(item) if passed_sell_by_date?(item)
     decrease_quality(item)
@@ -109,6 +118,8 @@ class GildedRose
       change_quality_of_brie(item)
     elsif backstage_pass?(item)
       change_quality_of_backstage_pass(item)
+    elsif conjured?(item)
+      change_quality_of_conjured(item)
     else # regular item
       change_quality_of_regular(item)
     end
