@@ -3,8 +3,8 @@ require_relative 'item'
 class GildedRose
   MAX_QUALITY = 50
   # Consider renaming 🤔
-  DAYS_TO_CONCERT_CLOSE = 10
-  DAYS_TO_CONCERT_CLOSER = 5
+  TEN_DAYS_TO_CONCERT = 10
+  FIVE_DAYS_TO_CONCERT = 5
 
   def initialize(items)
     @items = items
@@ -76,11 +76,11 @@ class GildedRose
   end
 
   def days_to_concert_less_than_5?(item)
-    get_sell_in(item) <= DAYS_TO_CONCERT_CLOSER
+    get_sell_in(item) <= FIVE_DAYS_TO_CONCERT
   end
 
   def days_to_concert_less_than_10?(item)
-    get_sell_in(item) <= DAYS_TO_CONCERT_CLOSE
+    get_sell_in(item) <= TEN_DAYS_TO_CONCERT
   end
 
   def change_quality_of_backstage_pass(item)
